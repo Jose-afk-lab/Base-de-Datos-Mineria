@@ -1,0 +1,199 @@
+
+Ejemplo de Otro Grupo: 
+
+Codigo para crear la base de Datos:
+
+create database mina;
+
+Codigo para crear las tablas:
+
+create table Cliente (
+	Cliente_ID int,
+	Nombre varchar(30),
+	Teléfono varchar(30),
+	primary key(Cliente_ID)
+	);
+
+create table Proyecto (
+	Altitud varchar(30),
+	Ubicacion varchar(30),
+	Nombre varchar(30),
+	Cliente_ID int references Cliente(Cliente_ID),
+	primary key(Nombre)
+	);
+	//ID proyecto
+     
+
+create table Operación (
+	Operacion_ID varchar(30),  /agregado
+	Nombre varchar(30),
+	Fecha varchar(30),
+	Altitud varchar(30),
+	Ubicación varchar(30),
+	primary key(Nombre)
+	);
+	//
+       
+create table ClienteOperacion(
+	Cliente_ID references Cliente(Cliente_ID),
+	Operacion_ID references Operacion(Operacion_ID),
+	);
+	
+create table EmpleadoOperacion(
+	Empleado_ID references Empleado(Empleado_ID),
+	Operacion_ID references Operacion(Operacion_ID),
+	);   //
+	
+create table EmpleadoProyecto(
+	Empleado
+	
+	);
+	
+create table CargoSalario(
+	Cargo varchar(30),
+	Salario int,
+	primary key(Cargo)
+	);
+
+
+create table Maquinaria (
+	Modelo varchar(30),
+	Maquinaria_ID int,
+	Nombre varchar(30),
+	Marca varchar(30),
+	Cantidad varchar(30),
+	primary key(Maquinaria_ID)
+	);
+
+Create table Proveedor (
+	RUC varchar(30),
+	Teléfono varchar(30),
+	Email varchar(30),
+	Nombre varchar(30),
+    primary key(RUC) 
+    );
+
+create table Factura (
+    Número varchar(30),
+    Pago varchar(30),
+    Fecha varchar(30),
+    Cliente_ID int references Cliente(Cliente_ID),
+    primary key(Número)
+    );
+
+create table Suministrado (
+    Maquinaria_ID int references Maquinaria(Maquinaria_ID),
+    Proveedor_RUC varchar(30) references Proveedor(RUC)
+    );
+
+Create table Producto (
+    Producto_ID int,
+    Nombre varchar(30),
+    Cliente_ID int references Cliente(Cliente_ID),
+    Proyecto_nombre varchar(30) references Proyecto(Nombre),
+    Primary key(Producto_ID)
+    );
+
+Create table ProyectoOperacion (
+    Proyecto_Nombre varchar(30) references Proyecto(Nombre),
+    Operación_Nombre varchar(30) references Operación(Nombre)
+    );
+
+create table Empleado (
+    Carga varchar(30),
+    Teléfono varchar(30),
+    Salario varchar(30),
+    Dirección varchar(30),
+    Nombre varchar(30),
+    Empleado_ID int,
+    Proyecto_Nombre varchar(30) references Proyecto(Nombre),
+    primary key(Empleado_ID)
+    ;
+
+Create table Compra (
+    Emplead_ID int references Empleado(Empleado_ID),
+    Maquinaria_ID int references Maquinaria(Maquinaria_ID),
+    Costo varchar(30)
+    );
+
+	
+create table ConflictoSocial(
+	Ubicacion references Operacion(Ubicacion);    //duda
+	Situacion varchar(30);
+	),
+	
+create table Supervisor(
+	Supervisor_ID int,
+	nombre varchar(30),
+	Dirección,
+	Teléfono,
+	Salario,
+	
+	
+	
+Codigo SQL para ingresar datos a las tablas:
+
+
+Insert Into clientes(cliente_id,nombre,teléfono) values(i,'c','c');
+Insert Into compra(emplead_id,maquinaria_id,costo) values(int,int,'c');
+Insert Into empleado(carga,teléfono,salario,dirección,nombre,empleado_id,proyecto_nombre) values('c','c','c','c','c',i,'c');
+Insert Into factura(número,pago,fecha,cliente_id), values('c','c','c',i);
+Insert Into maquinaria(modelo,maquinaria_id,nombre,marca,cantidad) values('c',i,'c','c','c');
+Insert Into operación(nombre,fecha,altitud,ubicación) values('c''c''c''c');
+Insert Into producto(producto_id,nombre,cliente_id,proyecto_nombre) values(i,'c',i,'c');
+Insert Into proveedor(ruct,teléfono,email,nombre) values('c','c','c','c');
+Insert Into proyecto(altitud,ubicación,nombre,cliente_id), values('c','c','c',i);
+Insert Into suministrado(maquinaria_id, proveedor_ruc) values(i,'c');
+
+Insert Into proyectoopearcion(proyecto_nombre,operación_nombre) values('c','c');
+Insert Into ClienteOperacion() values();
+Insert Into EmpleadoOperacion() values();
+Insert Into EmpleadoProyecto() values();
+Insert Into CargoSalario() values();
+Insert Into Conflicto Social(ubicacion, ) values();
+Insert Into Supervisor() values();
+
+
+Codigo para hacer consultas:
+-Selección:
+	Buscar los datos de los empleados con salario entre 3000 y 5000.
+	Select * from empleado where salario between 3000 y 5000;
+-Proyección:
+	Buscar los nombre de los proveedores.
+	Select "nombre-proveedor" from proveedor;
+-Unión:
+	Buscar los nombres de los clientes y de los proveedores.
+	Select "nombre-cliente" from cliente union select "nombre-proveedor" from proveedor
+-Intersección:
+	Buscar los numeros de las facturas de los clientes y la factura. 
+	Select "numero-factura" from cliente INTERSECT SELECT "numero-factura" from factura;
+-Diferecia: 
+	Buscar el id del mineral que no produce los proyectos pero si las operaciones.
+	Select "id-mineral" from operaciones EXCEPT SELECT "id-mineral" from proyectos;
+	
+	
+	2.select "nombre" from pescadores union select "calificacion" from pescadores intersect select "nombre"=triton from embarcaciones
+	
+	3. Select "pid" from pescadores union select "color" rojo from embarcaciones union SELECT "color"=azul from proyectos;
+	
+	4.Select "pid" from pescadores union select "color"=rojo from embarcaciones EXCEPT SELECT "color"=azul from proyectos;
+	
+	4.Select "eid" from pescadores union select "color"=rojo from embarcaciones EXCEPT SELECT "color"=azul from proyectos;
+	
+	select * from pescadores;
+	select * from reservas;
+	select * from embarcaciones;
+	
+	
+	
+-División:
+-Producto Cartesiano:
+	Buscar los datos de los clientes que efectúan las facturas.
+	Select * from cliente CROSS JOIN factura WHERE cliente."numero-factura"=factura."numero-factura";
+-Join Left:
+	Buscar los datos de los proyectos y aquellos productos que se muestan en proyectos.
+	Select * from proyectos LEFT OUTER JOIN producto ON "id-mineral"="id-producto";
+-Join Right:
+	Buscar los datos de los productos y aquellas operaciones que se producen los minerales.
+	Select * from operaciones RIGHT OUTER JOIN producto ON "id-mineral"="id-producto";
+
