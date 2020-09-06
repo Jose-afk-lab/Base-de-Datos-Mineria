@@ -63,7 +63,7 @@ create table Maquinaria (
 	Maquinaria_ID int,
 	Nombre varchar(30),
 	Marca varchar(30),
-	Cantidad varchar(30),
+	Cantidad int,
 	primary key(Maquinaria_ID)
 	);
 
@@ -114,13 +114,13 @@ create table Empleado (
 
 Create table Compra (
     Emplead_ID int references Empleado(Empleado_ID),
-    Maquinaria_ID int references Maquinaria(Maquinaria_ID),
+    Maquinaria_ID int references Maquinaria(Maquinaria_ID);
     Costo varchar(30)
     );
 
 	
 create table ConflictoSocial(
-	Ubicacion references Operacion(Ubicacion);    //duda
+	Operacion_ID references Operacion(Operacion_ID);    
 	Situacion varchar(30);
 	),
 	
